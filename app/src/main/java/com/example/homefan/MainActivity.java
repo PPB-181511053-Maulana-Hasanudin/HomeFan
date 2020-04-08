@@ -1,12 +1,15 @@
 package com.example.homefan;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -31,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
-        imageView = (ImageView) findViewById(R.id.imageView);
-        switchButton = (Switch) findViewById(R.id.switchButton);
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        imageView = (ImageView) findViewById(R.id.imageView6);
+        switchButton = (Switch) findViewById(R.id.switch1);
+        seekBar = (SeekBar) findViewById(R.id.seekBar4);
 
         rotateAnimator = ObjectAnimator.ofFloat(imageView, "rotation", 0, 360);
         rotateAnimator.setDuration(1000);
@@ -57,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
         gd.setGradientRadius(330);
 
         switchButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 if (switchButton.isChecked()) {
                     gd.setColors(new int[] {Color.YELLOW, Color.TRANSPARENT});
-                    imageView.setBackground(gd);
+                    imageView.setBackgroundColor(Color.YELLOW);
                 } else {
                     imageView.setBackgroundColor(Color.TRANSPARENT);
                 }
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         seekBar.setMax(3);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 index = progress;
